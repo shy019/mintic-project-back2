@@ -5,32 +5,40 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "roles")
 public class Role {
-  @Id
-  private String id;
+	@Id
+	private String id;
 
-  private ERole name;
+	private ERole name;
 
-  public Role() {
+	public String getId() {
+		return id;
+	}
 
-  }
+	public void setId(String id) {
+		this.id = id;
+	}
 
-  public Role(ERole name) {
-    this.name = name;
-  }
+	public ERole getName() {
+		return name;
+	}
 
-  public String getId() {
-    return id;
-  }
+	public void setName(ERole name) {
+		this.name = name;
+	}
 
-  public void setId(String id) {
-    this.id = id;
-  }
+	public Role(String id, ERole name) {
+		super();
+		this.id = id;
+		this.name = name;
+	}
 
-  public ERole getName() {
-    return name;
-  }
+	public Role() {
+		super();
+	}
 
-  public void setName(ERole name) {
-    this.name = name;
-  }
+	@Override
+	public String toString() {
+		return "Role [id=" + id + ", name=" + name + "]";
+	}
+
 }

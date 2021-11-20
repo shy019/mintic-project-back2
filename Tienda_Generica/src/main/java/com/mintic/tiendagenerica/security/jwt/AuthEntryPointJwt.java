@@ -2,7 +2,6 @@ package com.mintic.tiendagenerica.security.jwt;
 
 import java.io.IOException;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -19,9 +18,9 @@ public class AuthEntryPointJwt implements AuthenticationEntryPoint {
 
 	@Override
 	public void commence(HttpServletRequest request, HttpServletResponse response,
-			AuthenticationException authException) throws IOException, ServletException {
-		logger.error("Unauthorized error: {}", authException.getMessage());
-		response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Error: Unauthorized");
+			AuthenticationException authException) throws IOException {
+		logger.error("No autorizado: {}", authException.getMessage());
+		response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Error: No autorizado");
 	}
 
 }

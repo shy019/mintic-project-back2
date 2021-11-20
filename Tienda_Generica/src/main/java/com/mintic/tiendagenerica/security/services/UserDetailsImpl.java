@@ -15,24 +15,24 @@ import com.mintic.tiendagenerica.models.jwt.User;
 public class UserDetailsImpl implements UserDetails {
 	private static final long serialVersionUID = 1L;
 
-	private Long cedula;
+	private final Long cedula;
 
-	private String user;
+	private String username;
 
 	private String name;
 
-	private String email;
+	private final String email;
 
 	@JsonIgnore
-	private String password;
+	private final String password;
 
-	private Collection<? extends GrantedAuthority> authorities;
+	private final Collection<? extends GrantedAuthority> authorities;
 
-	public UserDetailsImpl(Long id, String name, String username, String email, String password,
+	public UserDetailsImpl(Long cedula, String name, String username, String email, String password,
 			Collection<? extends GrantedAuthority> authorities) {
-		this.cedula = id;
+		this.cedula = cedula;
 		this.name = name;
-		this.user = username;
+		this.username = username;
 		this.email = email;
 		this.password = password;
 		this.authorities = authorities;
@@ -42,8 +42,8 @@ public class UserDetailsImpl implements UserDetails {
 		List<GrantedAuthority> authorities = user.getRoles().stream()
 				.map(role -> new SimpleGrantedAuthority(role.getName().name())).collect(Collectors.toList());
 
-		return new UserDetailsImpl(user.getId(), user.getName(), user.getUser(), user.getEmail(), user.getPassword(),
-				authorities);
+		return new UserDetailsImpl(user.getCedula(), user.getName(), user.getUsername(), user.getEmail(),
+				user.getPassword(), authorities);
 	}
 
 	public String getName() {
@@ -59,7 +59,7 @@ public class UserDetailsImpl implements UserDetails {
 		return authorities;
 	}
 
-	public Long getId() {
+	public Long getCedula() {
 		return cedula;
 	}
 
@@ -74,7 +74,7 @@ public class UserDetailsImpl implements UserDetails {
 
 	@Override
 	public String getUsername() {
-		return user;
+		return username;
 	}
 
 	@Override
@@ -107,24 +107,8 @@ public class UserDetailsImpl implements UserDetails {
 		return Objects.equals(cedula, user.cedula);
 	}
 
-	public Long getCedula() {
-		return cedula;
-	}
-
-	public void setCedula(Long cedula) {
-		this.cedula = cedula;
-	}
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public void setAuthorities(Collection<? extends GrantedAuthority> authorities) {
-		this.authorities = authorities;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 }

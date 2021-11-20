@@ -2,7 +2,7 @@ package com.mintic.tiendagenerica.payload.request;
 
 import javax.validation.constraints.NotBlank;
 
-public class LoginRequest {
+public class LoginRequestDTO {
 	@NotBlank
 	private String username;
 
@@ -24,4 +24,20 @@ public class LoginRequest {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
+	public LoginRequestDTO(@NotBlank String username, @NotBlank String password) {
+		super();
+		this.username = username;
+		this.password = password;
+	}
+
+	public LoginRequestDTO() {
+		super();
+	}
+
+	@Override
+	public String toString() {
+		return "LoginRequestDTO [username=" + username + ", password=" + password + "]";
+	}
+
 }

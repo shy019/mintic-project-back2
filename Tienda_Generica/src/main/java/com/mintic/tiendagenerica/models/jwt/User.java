@@ -34,24 +34,12 @@ public class User {
 	@DBRef
 	private Set<Role> roles = new HashSet<>();
 
-	public User() {
+	public Long getCedula() {
+		return cedula;
 	}
 
-	public User(long cedula, String name, String email, String username, String password, Set<Role> roles) {
+	public void setCedula(Long cedula) {
 		this.cedula = cedula;
-		this.name = name;
-		this.email = email;
-		this.username = username;
-		this.password = password;
-		this.roles = roles;
-	}
-
-	public User(long cedula, String name, String email, String username, String password) {
-		this.cedula = cedula;
-		this.name = name;
-		this.email = email;
-		this.username = username;
-		this.password = password;
 	}
 
 	public String getName() {
@@ -70,11 +58,11 @@ public class User {
 		this.email = email;
 	}
 
-	public String getUser() {
+	public String getUsername() {
 		return username;
 	}
 
-	public void setUser(String username) {
+	public void setUsername(String username) {
 		this.username = username;
 	}
 
@@ -86,14 +74,6 @@ public class User {
 		this.password = password;
 	}
 
-	public long getId() {
-		return cedula;
-	}
-
-	public void setId(long cedula) {
-		this.cedula = cedula;
-	}
-
 	public Set<Role> getRoles() {
 		return roles;
 	}
@@ -101,4 +81,36 @@ public class User {
 	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
 	}
+
+	public User(Long cedula, @NotBlank @Size(max = 150) String name, @NotBlank @Size(max = 50) String email,
+			@NotBlank @Size(max = 20) String username, @NotBlank @Size(max = 120) String password, Set<Role> roles) {
+		super();
+		this.cedula = cedula;
+		this.name = name;
+		this.email = email;
+		this.username = username;
+		this.password = password;
+		this.roles = roles;
+	}
+
+	public User(Long cedula, @NotBlank @Size(max = 150) String name, @NotBlank @Size(max = 50) String email,
+			@NotBlank @Size(max = 20) String username, @NotBlank @Size(max = 120) String password) {
+		super();
+		this.cedula = cedula;
+		this.name = name;
+		this.email = email;
+		this.username = username;
+		this.password = password;
+	}
+
+	public User() {
+		super();
+	}
+
+	@Override
+	public String toString() {
+		return "User [cedula=" + cedula + ", name=" + name + ", email=" + email + ", username=" + username
+				+ ", password=" + password + ", roles=" + roles + "]";
+	}
+
 }
