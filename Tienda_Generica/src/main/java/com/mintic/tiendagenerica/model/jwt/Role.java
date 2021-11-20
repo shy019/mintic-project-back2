@@ -1,4 +1,4 @@
-package com.mintic.tiendagenerica.models.jwt;
+package com.mintic.tiendagenerica.model.jwt;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;

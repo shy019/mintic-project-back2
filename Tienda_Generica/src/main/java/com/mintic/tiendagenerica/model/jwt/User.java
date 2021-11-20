@@ -1,4 +1,4 @@
-package com.mintic.tiendagenerica.models.jwt;
+package com.mintic.tiendagenerica.model.jwt;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -10,7 +10,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection = "users")
+@Document(collection = "usuarios")
 public class User {
 	@Id
 	private Long cedula;

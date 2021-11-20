@@ -9,13 +9,13 @@ import com.mintic.tiendagenerica.payload.request.SignupRequestDTO;
 public interface IUserService {
 	public List<UserResponseDTO> getUsers() throws TiendaGenericaException;
 
-	public UserResponseDTO getUserByCedula(Long id) throws TiendaGenericaException;
+	public UserResponseDTO getUserByCedula(Long cedula) throws TiendaGenericaException;
 
 	public UserResponseDTO saveUser(SignupRequestDTO user) throws TiendaGenericaException;
 
-	public UserResponseDTO deleteUser(long id) throws TiendaGenericaException;
+	public UserResponseDTO deleteUser(long cedula) throws TiendaGenericaException;
 
 	public UserResponseDTO updateUser(SignupRequestDTO user) throws TiendaGenericaException;
 
-	public UserResponseDTO getUserByName(String id) throws TiendaGenericaException;
+	public UserResponseDTO getUserByName(String nombre) throws TiendaGenericaException;
 }

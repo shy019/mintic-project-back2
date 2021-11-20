@@ -12,9 +12,9 @@ import org.springframework.stereotype.Service;
 
 import com.mintic.tiendagenerica.dto.response.UserResponseDTO;
 import com.mintic.tiendagenerica.exception.TiendaGenericaException;
-import com.mintic.tiendagenerica.models.jwt.ERole;
-import com.mintic.tiendagenerica.models.jwt.Role;
-import com.mintic.tiendagenerica.models.jwt.User;
+import com.mintic.tiendagenerica.model.jwt.ERole;
+import com.mintic.tiendagenerica.model.jwt.Role;
+import com.mintic.tiendagenerica.model.jwt.User;
 import com.mintic.tiendagenerica.payload.request.SignupRequestDTO;
 import com.mintic.tiendagenerica.repository.IRoleRepository;
 import com.mintic.tiendagenerica.repository.IUserRepository;
@@ -52,10 +52,10 @@ public class UserService implements IUserService {
 	}
 
 	@Override
-	public UserResponseDTO getUserByCedula(Long id) throws TiendaGenericaException {
+	public UserResponseDTO getUserByCedula(Long cedula) throws TiendaGenericaException {
 
-		return this.modelMapper.map(iUserRepository.findUserByCedula(id).orElseThrow(
-				() -> new TiendaGenericaException("No hay un usuario con ese nombre")), UserResponseDTO.class);
+		return this.modelMapper.map(iUserRepository.findUserByCedula(cedula).orElseThrow(
+				() -> new TiendaGenericaException("No hay un usuario con esa cedula")), UserResponseDTO.class);
 
 	}
 
@@ -63,10 +63,18 @@ public class UserService implements IUserService {
 	public UserResponseDTO deleteUser(long cedula) throws TiendaGenericaException {
 
 		User user = iUserRepository.findUserByCedula(cedula)
-				.orElseThrow(() -> new TiendaGenericaException("No hay un usuario con ese nombre"));
+				.orElseThrow(() -> new TiendaGenericaException("No hay un usuario con esa cedula"));
 
 		iUserRepository.deleteByCedula(cedula);
 		return this.modelMapper.map(user, UserResponseDTO.class);
+
+	}
+
+	@Override
+	public UserResponseDTO getUserByName(String nombre) throws TiendaGenericaException {
+
+		return this.modelMapper.map(iUserRepository.findUserByName(nombre).orElseThrow(
+				() -> new TiendaGenericaException("No hay un usuario con ese nombre")), UserResponseDTO.class);
 
 	}
 
@@ -115,14 +123,6 @@ public class UserService implements IUserService {
 		iUserRepository.save(newUser);
 
 		return this.modelMapper.map(newUser, UserResponseDTO.class);
-
-	}
-
-	@Override
-	public UserResponseDTO getUserByName(String id) throws TiendaGenericaException {
-
-		return this.modelMapper.map(iUserRepository.findUserByName(id).orElseThrow(
-				() -> new TiendaGenericaException("No hay un usuario con ese nombre")), UserResponseDTO.class);
 
 	}
 

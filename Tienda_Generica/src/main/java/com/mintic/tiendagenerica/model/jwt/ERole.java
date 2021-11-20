@@ -1,4 +1,4 @@
-package com.mintic.tiendagenerica.models.jwt;
+package com.mintic.tiendagenerica.model.jwt;
 
 public enum ERole {
   ROLE_USER,

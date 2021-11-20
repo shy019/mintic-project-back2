@@ -7,7 +7,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.mintic.tiendagenerica.models.jwt.User;
+import com.mintic.tiendagenerica.model.jwt.User;
 import com.mintic.tiendagenerica.repository.IUserRepository;
 
 @Service
