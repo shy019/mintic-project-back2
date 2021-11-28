@@ -13,7 +13,7 @@ public interface IUserService {
 
 	public UserResponseDTO saveUser(SignupRequestDTO user) throws TiendaGenericaException;
 
-	public UserResponseDTO deleteUser(long cedula) throws TiendaGenericaException;
+	public UserResponseDTO deleteUser(Long cedula) throws TiendaGenericaException;
 
 	public UserResponseDTO updateUser(SignupRequestDTO user) throws TiendaGenericaException;
 

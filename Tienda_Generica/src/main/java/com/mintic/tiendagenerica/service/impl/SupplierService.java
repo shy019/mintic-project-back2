@@ -43,7 +43,7 @@ public class SupplierService implements ISupplierService {
 
 		return this.modelMapper.map(
 				iSupplierRepository.findSupplierByNitProveedor(nitProveedor)
-						.orElseThrow(() -> new TiendaGenericaException("No hay un proveedor con es Nit")),
+						.orElseThrow(() -> new TiendaGenericaException("No hay un proveedor con ese Nit")),
 				SupplierResponseDTO.class);
 
 	}
@@ -51,13 +51,19 @@ public class SupplierService implements ISupplierService {
 	@Override
 	public SupplierResponseDTO saveSupplier(SupplierRequestDTO supplier) throws TiendaGenericaException {
 
-		return this.modelMapper.map(iSupplierRepository.save(this.modelMapper.map(supplier, Supplier.class)),
-				SupplierResponseDTO.class);
+		if (iSupplierRepository.existsByNitProveedor(supplier.getNitProveedor())) {
+
+			throw new TiendaGenericaException("Este NIT ya existe en la Base de datos");
+		} else {
+
+			return this.modelMapper.map(iSupplierRepository.save(this.modelMapper.map(supplier, Supplier.class)),
+					SupplierResponseDTO.class);
+		}
 
 	}
 
 	@Override
-	public SupplierResponseDTO deleteSupplier(long nitProveedor) throws TiendaGenericaException {
+	public SupplierResponseDTO deleteSupplier(Long nitProveedor) throws TiendaGenericaException {
 
 		Supplier proveedor = iSupplierRepository.findSupplierByNitProveedor(nitProveedor)
 				.orElseThrow(() -> new TiendaGenericaException("No hay un proveedor con ese Nit"));

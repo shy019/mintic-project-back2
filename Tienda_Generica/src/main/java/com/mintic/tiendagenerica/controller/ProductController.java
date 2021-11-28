@@ -15,62 +15,68 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.mintic.tiendagenerica.dto.request.SupplierRequestDTO;
-import com.mintic.tiendagenerica.dto.response.SupplierResponseDTO;
+import com.mintic.tiendagenerica.dto.request.ProductRequestDTO;
+import com.mintic.tiendagenerica.dto.response.ProductResponseDTO;
 import com.mintic.tiendagenerica.exception.TiendaGenericaException;
-import com.mintic.tiendagenerica.service.ISupplierService;
+import com.mintic.tiendagenerica.service.IProductService;
 
 @RestController
-@RequestMapping("/api/tiendagenerica/supplier")
+@RequestMapping("/api/tiendagenerica/product")
 @CrossOrigin(origins = "*", maxAge = 3600L)
-public class SupplierController {
+public class ProductController {
 
-	@Qualifier("SupplierService")
-	ISupplierService iSupplierService;
+	@Qualifier("ProductService")
+	IProductService iProductService;
 
-	public SupplierController(ISupplierService iSupplierService) {
-		this.iSupplierService = iSupplierService;
+	public ProductController(IProductService iProductService) {
+		this.iProductService = iProductService;
 	}
 
 	@PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
 	@CrossOrigin(origins = "http://localhost:8090")
 	@RequestMapping(value = "/", method = RequestMethod.GET, produces = { "application/JSON" })
-	public ResponseEntity<List<SupplierResponseDTO>> getSuppliers() throws TiendaGenericaException {
-		return new ResponseEntity<List<SupplierResponseDTO>>(iSupplierService.getSuppliers(), HttpStatus.OK);
+	public ResponseEntity<List<ProductResponseDTO>> getProducts() throws TiendaGenericaException {
+		return new ResponseEntity<List<ProductResponseDTO>>(iProductService.getProducts(), HttpStatus.OK);
 	}
 
 	@PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
 	@CrossOrigin(origins = "http://localhost:8090")
 	@RequestMapping(value = "/{nitProveedor}", method = RequestMethod.GET, produces = { "application/JSON" })
-	public ResponseEntity<SupplierResponseDTO> getSupplier(@PathVariable("nitProveedor") Long nitProveedor)
+	public ResponseEntity<ProductResponseDTO> getProduct(@PathVariable("codigoProducto") Long codigoProducto)
 			throws TiendaGenericaException {
-		return new ResponseEntity<SupplierResponseDTO>(iSupplierService.getSupplierByCedula(nitProveedor), HttpStatus.OK);
+		return new ResponseEntity<ProductResponseDTO>(iProductService.getProductByCodigoProducto(codigoProducto),
+				HttpStatus.OK);
 	}
 
 	@PreAuthorize("hasRole('MODERATOR') or hasRole('ADMIN')")
 	@CrossOrigin(origins = "http://localhost:8090")
 	@RequestMapping(value = "/", method = RequestMethod.POST, consumes = { "application/JSON" }, produces = {
 			"application/JSON" })
-	public ResponseEntity<SupplierResponseDTO> save(@Valid @RequestBody SupplierRequestDTO supplier)
+	public ResponseEntity<ProductResponseDTO> save(@Valid @RequestBody ProductRequestDTO product)
 			throws TiendaGenericaException {
 
-		return new ResponseEntity<SupplierResponseDTO>(iSupplierService.saveSupplier(supplier), HttpStatus.OK);
+		return new ResponseEntity<ProductResponseDTO>(iProductService.saveProduct(product), HttpStatus.OK);
 	}
 
 	@PreAuthorize("hasRole('MODERATOR') or hasRole('ADMIN')")
 	@CrossOrigin(origins = "http://localhost:8090")
 	@RequestMapping(value = "/", method = RequestMethod.PUT, produces = { "application/JSON" }, consumes = {
 			"application/JSON" })
-	public ResponseEntity<SupplierResponseDTO> editar(@RequestBody SupplierRequestDTO supplier)
+	public ResponseEntity<ProductResponseDTO> editar(@RequestBody ProductRequestDTO product)
 			throws TiendaGenericaException {
-		return new ResponseEntity<SupplierResponseDTO>(iSupplierService.updateSupplier(supplier), HttpStatus.OK);
+		return new ResponseEntity<ProductResponseDTO>(iProductService.updateProduct(product), HttpStatus.OK);
+		// return new
+		// ResponseEntity<SupplierResponseDTO>(iSupplierService.updateSupplier(supplier),
+		// HttpStatus.OK);
+
 	}
 
 	@PreAuthorize("hasRole('MODERATOR') or hasRole('ADMIN')")
 	@CrossOrigin(origins = "http://localhost:8090")
 	@RequestMapping(value = "/{nitProveedor}", method = RequestMethod.DELETE, produces = { "application/JSON" })
-	public ResponseEntity<SupplierResponseDTO> delete(@PathVariable("nitProveedor") Long nitProveedor)
+	public ResponseEntity<ProductResponseDTO> delete(@PathVariable("codigoProducto") Long codigoProducto)
 			throws TiendaGenericaException {
-		return new ResponseEntity<SupplierResponseDTO>(iSupplierService.deleteSupplier(nitProveedor), HttpStatus.OK);
+		return new ResponseEntity<ProductResponseDTO>(iProductService.deleteProduct(codigoProducto), HttpStatus.OK);
 	}
+
 }

@@ -2,17 +2,17 @@ package com.mintic.tiendagenerica.dto.response;
 
 public class SupplierResponseDTO {
 
-	private long nitProveedor;
+	private Long nitProveedor;
 	private String ciudadProveedor;
 	private String direccionProveedor;
 	private String nombreProveedor;
 	private String telefonoProveedor;
 
-	public long getNitProveedor() {
+	public Long getNitProveedor() {
 		return nitProveedor;
 	}
 
-	public void setNitProveedor(long nitProveedor) {
+	public void setNitProveedor(Long nitProveedor) {
 		this.nitProveedor = nitProveedor;
 	}
 
@@ -48,7 +48,7 @@ public class SupplierResponseDTO {
 		this.telefonoProveedor = telefonoProveedor;
 	}
 
-	public SupplierResponseDTO(long nitProveedor, String ciudadProveedor, String direccionProveedor,
+	public SupplierResponseDTO(Long nitProveedor, String ciudadProveedor, String direccionProveedor,
 			String nombreProveedor, String telefonoProveedor) {
 		super();
 		this.nitProveedor = nitProveedor;

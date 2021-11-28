@@ -60,7 +60,7 @@ public class UserService implements IUserService {
 	}
 
 	@Override
-	public UserResponseDTO deleteUser(long cedula) throws TiendaGenericaException {
+	public UserResponseDTO deleteUser(Long cedula) throws TiendaGenericaException {
 
 		User user = iUserRepository.findUserByCedula(cedula)
 				.orElseThrow(() -> new TiendaGenericaException("No hay un usuario con esa cedula"));
