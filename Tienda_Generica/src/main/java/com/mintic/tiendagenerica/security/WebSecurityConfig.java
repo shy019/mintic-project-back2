@@ -18,7 +18,7 @@ import com.mintic.tiendagenerica.security.jwt.AuthEntryPointJwt;
 import com.mintic.tiendagenerica.security.jwt.AuthTokenFilter;
 import com.mintic.tiendagenerica.security.services.UserDetailsServiceImpl;
 
-import springfox.documentation.service.ApiKey;
+//import springfox.documentation.service.ApiKey;
 
 @Configuration
 @EnableWebSecurity
