@@ -129,12 +129,16 @@ public class ProductService implements IProductService {
 		List<ProductResponseDTO> noGuardados = new ArrayList<ProductResponseDTO>();
 
 		for (ProductAllRequestDTO producto : productos) {
-			if (iProductRepository.findProductByCodigoProducto(producto.getCodigoProducto()).isPresent())
+			if (iProductRepository.findProductByCodigoProducto(producto.getCodigoProducto()).isPresent()) {
 				noGuardados.add(this.modelMapper.map(producto, ProductResponseDTO.class));
+				continue;
+			}
 
 			Optional<Supplier> supplier = iSupplierRepository.findSupplierByNitProveedor(producto.getNitProveedor());
-			if (!supplier.isPresent())
+			if (!supplier.isPresent()) {
 				noGuardados.add(this.modelMapper.map(producto, ProductResponseDTO.class));
+				continue;
+			}
 
 			Product nuevoProducto = new Product();
 			nuevoProducto.setCodigoProducto(producto.getCodigoProducto());
@@ -143,15 +147,14 @@ public class ProductService implements IProductService {
 			nuevoProducto.setNombreProducto(producto.getNombreProducto());
 			nuevoProducto.setPrecioCompra(producto.getPrecioCompra());
 			nuevoProducto.setPrecioVenta(producto.getPrecioVenta());
+
 			Product productoGuardado = iProductRepository.save(nuevoProducto);
 			guardados.add(this.modelMapper.map(productoGuardado, ProductResponseDTO.class));
 			contador++;
 		}
 
-		return new ResponseDTO(contador, "Se guardaron ".concat(contador+"")
-				.concat(" registros y no se guardaron ")
-				.concat((productos.length -contador)+"" ).concat(" registros."),
-				guardados, noGuardados);
+		return new ResponseDTO(contador, "Se guardaron ".concat(contador + "").concat(" registros y no se guardaron ")
+				.concat((productos.length - contador) + "").concat(" registros."), guardados, noGuardados);
 	}
 
 }

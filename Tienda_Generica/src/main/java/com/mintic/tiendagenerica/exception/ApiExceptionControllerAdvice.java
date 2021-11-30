@@ -37,7 +37,7 @@ public class ApiExceptionControllerAdvice {
 		return new ApiError(HttpStatus.INTERNAL_SERVER_ERROR.value(), ex.getClass().getName(), ex.getMessage());
 	}
 
-	@ResponseStatus(HttpStatus.BAD_REQUEST)
+	/*@ResponseStatus(HttpStatus.BAD_REQUEST)
 	@ExceptionHandler({ MethodArgumentTypeMismatchException.class, HttpMessageNotReadableException.class ,
 		org.springframework.beans.factory.UnsatisfiedDependencyException.class})
 	@ResponseBody
@@ -46,7 +46,7 @@ public class ApiExceptionControllerAdvice {
 				"Internal error::".concat(ex.getMessage().isEmpty() ? ex.getStackTrace().toString() : ex.getMessage()));
 		return new ApiError(HttpStatus.BAD_REQUEST.value(), ex.getClass().getName(),
 				"The date does not have a valid format. ");
-	}
+	}*/
 
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
 	@ExceptionHandler({ TiendaGenericaException.class, BadRequestException.class,

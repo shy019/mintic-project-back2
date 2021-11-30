@@ -10,16 +10,20 @@ public class ProductAllRequestDTO {
 	@Id
 	private Long codigoProducto;
 
-	@NotBlank
+	@NotBlank(message = "Debe digitar el nombre del nombreProducto")
 	@Size(max = 50)
 	private String nombreProducto;
 
+	@NotBlank(message = "Debe digitar el nombre del nitProveedor")
 	private Long nitProveedor;
 
+	@NotBlank(message = "Debe digitar el nombre del precioCompra")
 	private Double precioCompra;
 
+	@NotBlank(message = "Debe digitar el nombre del ivaCompra")
 	private Double ivaCompra;
 
+	@NotBlank(message = "Debe digitar el nombre del precioVenta")
 	private Double precioVenta;
 
 	public Long getCodigoProducto() {

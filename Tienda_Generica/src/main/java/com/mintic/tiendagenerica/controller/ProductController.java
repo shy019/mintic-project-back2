@@ -64,10 +64,10 @@ public class ProductController {
 	@CrossOrigin(origins = "http://localhost:8090")
 	@RequestMapping(value = "/all", method = RequestMethod.POST, consumes = { "application/JSON" }, produces = {
 			"application/JSON" })
-	public ResponseEntity<ResponseDTO> saveAll(@Valid @RequestBody ProductAllRequestDTO[] product)
+	public ResponseEntity<ResponseDTO> saveAll(@Valid @RequestBody ProductAllRequestDTO[] products)
 			throws TiendaGenericaException {
 
-		return new ResponseEntity<ResponseDTO>(iProductService.saveAllProduct(product), HttpStatus.OK);
+		return new ResponseEntity<ResponseDTO>(iProductService.saveAllProduct(products), HttpStatus.OK);
 	}
 
 	@PreAuthorize("hasRole('MODERATOR') or hasRole('ADMIN')")

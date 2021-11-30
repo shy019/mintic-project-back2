@@ -10,25 +10,19 @@ public class ProductRequestDTO {
 
 	@Id
 	private Long codigoProducto;
-	// código_producto BIGINT 20
 
 	@NotBlank
 	@Size(max = 50)
 	private String nombreProducto;
-	// nombre_producto VARCHAR 50
 
 	@Valid
 	private SupplierRequestDTO nitProveedor;
-	// nitproveedor BIGINT 20
 
 	private Double precioCompra;
-	// precio_compra DOUBLE
 
 	private Double ivaCompra;
-	// ivacompra DOUBLE
 
 	private Double precioVenta;
-	// precio_venta DOUBLE
 
 	public Long getCodigoProducto() {
 		return codigoProducto;
