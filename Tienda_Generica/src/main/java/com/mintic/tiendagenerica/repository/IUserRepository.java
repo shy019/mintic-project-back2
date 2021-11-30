@@ -24,6 +24,6 @@ public interface IUserRepository extends MongoRepository<User, Long> {
 	Boolean existsByEmail(String email);
 
 	@Transactional
-	void deleteByCedula(Long cedula);
+	void deleteByCedula(long cedula);
 
 }

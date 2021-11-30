@@ -69,7 +69,7 @@ public class SupplierController {
 	@PreAuthorize("hasRole('MODERATOR') or hasRole('ADMIN')")
 	@CrossOrigin(origins = "http://localhost:8090")
 	@RequestMapping(value = "/{nitProveedor}", method = RequestMethod.DELETE, produces = { "application/JSON" })
-	public ResponseEntity<SupplierResponseDTO> delete(@PathVariable("nitProveedor") Long nitProveedor)
+	public ResponseEntity<SupplierResponseDTO> delete(@PathVariable("nitProveedor") long nitProveedor)
 			throws TiendaGenericaException {
 		return new ResponseEntity<SupplierResponseDTO>(iSupplierService.deleteSupplier(nitProveedor), HttpStatus.OK);
 	}

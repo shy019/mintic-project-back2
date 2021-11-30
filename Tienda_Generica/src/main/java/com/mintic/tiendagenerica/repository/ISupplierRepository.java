@@ -21,9 +21,9 @@ public interface ISupplierRepository extends MongoRepository<Supplier, Long> {
 
 	Boolean existsByNombreProveedor(String nombreProveedor);
 
-	Boolean existsByNitProveedor(Long long1);
+	Boolean existsByNitProveedor(Long nitProveedor);
 
 	@Transactional
-	void deleteByNitProveedor(Long nitProveedor);
+	void deleteByNitProveedor(long nitProveedor);
 
 }

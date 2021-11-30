@@ -13,7 +13,7 @@ public interface ISupplierService {
 
 	public SupplierResponseDTO saveSupplier(SupplierRequestDTO supplier) throws TiendaGenericaException;
 
-	public SupplierResponseDTO deleteSupplier(Long nitProveedor) throws TiendaGenericaException;
+	public SupplierResponseDTO deleteSupplier(long nitProveedor) throws TiendaGenericaException;
 
 	public SupplierResponseDTO updateSupplier(SupplierRequestDTO supplier) throws TiendaGenericaException;
 

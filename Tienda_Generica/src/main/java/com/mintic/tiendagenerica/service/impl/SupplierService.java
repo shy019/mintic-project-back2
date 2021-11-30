@@ -63,7 +63,7 @@ public class SupplierService implements ISupplierService {
 	}
 
 	@Override
-	public SupplierResponseDTO deleteSupplier(Long nitProveedor) throws TiendaGenericaException {
+	public SupplierResponseDTO deleteSupplier(long nitProveedor) throws TiendaGenericaException {
 
 		Supplier proveedor = iSupplierRepository.findSupplierByNitProveedor(nitProveedor)
 				.orElseThrow(() -> new TiendaGenericaException("No hay un proveedor con ese Nit"));

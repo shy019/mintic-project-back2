@@ -15,8 +15,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.mintic.tiendagenerica.dto.request.ProductAllRequestDTO;
 import com.mintic.tiendagenerica.dto.request.ProductRequestDTO;
 import com.mintic.tiendagenerica.dto.response.ProductResponseDTO;
+import com.mintic.tiendagenerica.dto.response.ResponseDTO;
 import com.mintic.tiendagenerica.exception.TiendaGenericaException;
 import com.mintic.tiendagenerica.service.IProductService;
 
@@ -41,7 +43,7 @@ public class ProductController {
 
 	@PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
 	@CrossOrigin(origins = "http://localhost:8090")
-	@RequestMapping(value = "/{nitProveedor}", method = RequestMethod.GET, produces = { "application/JSON" })
+	@RequestMapping(value = "/{codigoProducto}", method = RequestMethod.GET, produces = { "application/JSON" })
 	public ResponseEntity<ProductResponseDTO> getProduct(@PathVariable("codigoProducto") Long codigoProducto)
 			throws TiendaGenericaException {
 		return new ResponseEntity<ProductResponseDTO>(iProductService.getProductByCodigoProducto(codigoProducto),
@@ -60,6 +62,16 @@ public class ProductController {
 
 	@PreAuthorize("hasRole('MODERATOR') or hasRole('ADMIN')")
 	@CrossOrigin(origins = "http://localhost:8090")
+	@RequestMapping(value = "/all", method = RequestMethod.POST, consumes = { "application/JSON" }, produces = {
+			"application/JSON" })
+	public ResponseEntity<ResponseDTO> saveAll(@Valid @RequestBody ProductAllRequestDTO[] product)
+			throws TiendaGenericaException {
+
+		return new ResponseEntity<ResponseDTO>(iProductService.saveAllProduct(product), HttpStatus.OK);
+	}
+
+	@PreAuthorize("hasRole('MODERATOR') or hasRole('ADMIN')")
+	@CrossOrigin(origins = "http://localhost:8090")
 	@RequestMapping(value = "/", method = RequestMethod.PUT, produces = { "application/JSON" }, consumes = {
 			"application/JSON" })
 	public ResponseEntity<ProductResponseDTO> editar(@RequestBody ProductRequestDTO product)
@@ -73,7 +85,7 @@ public class ProductController {
 
 	@PreAuthorize("hasRole('MODERATOR') or hasRole('ADMIN')")
 	@CrossOrigin(origins = "http://localhost:8090")
-	@RequestMapping(value = "/{nitProveedor}", method = RequestMethod.DELETE, produces = { "application/JSON" })
+	@RequestMapping(value = "/{codigoProducto}", method = RequestMethod.DELETE, produces = { "application/JSON" })
 	public ResponseEntity<ProductResponseDTO> delete(@PathVariable("codigoProducto") Long codigoProducto)
 			throws TiendaGenericaException {
 		return new ResponseEntity<ProductResponseDTO>(iProductService.deleteProduct(codigoProducto), HttpStatus.OK);

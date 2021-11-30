@@ -1,7 +1,6 @@
 package com.mintic.tiendagenerica.model;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.springframework.data.annotation.Id;
@@ -9,10 +8,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "proveedores")
 public class Supplier {
-	
 	@Id
-	@NotNull
-	private Long nitProveedor;
+	private long nitProveedor;
 
 	@NotBlank
 	@Size(max = 150)

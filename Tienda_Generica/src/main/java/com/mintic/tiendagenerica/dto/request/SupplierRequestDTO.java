@@ -1,34 +1,27 @@
 package com.mintic.tiendagenerica.dto.request;
 
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 import org.springframework.data.annotation.Id;
-import org.springframework.validation.annotation.Validated;
 
-@Validated
 public class SupplierRequestDTO {
-	
-	@Min(value = 1, message = "NIT no válido")
-	@Max(value = 999999999, message = "NIT no válido")
 	@Id
-	private Long nitProveedor;
+	private long nitProveedor;
 
-	@NotBlank(message = "Debe digitar ciudad donde se localiza el Proveedor")
+	@NotBlank
 	@Size(max = 150)
 	private String ciudadProveedor;
 
-	@NotBlank(message = "Debe digitar dirección del Proveedor")
+	@NotBlank
 	@Size(max = 60)
 	private String direccionProveedor;
 
-	@NotBlank(message = "Debe digitar nombre del Proveedor")
-	@Size(max = 30) 
+	@NotBlank
+	@Size(max = 30)
 	private String nombreProveedor;
 
-	@NotBlank(message = "Debe digitar teléfono de contacto del Proveedor")
+	@NotBlank
 	@Size(max = 120)
 	private String telefonoProveedor;
 

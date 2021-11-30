@@ -22,7 +22,7 @@ import com.mintic.tiendagenerica.service.IUserService;
 
 @RestController
 @RequestMapping("/api/tiendagenerica/user")
-@CrossOrigin(origins = "*", maxAge = 3600L)
+@CrossOrigin(origins = "*", maxAge = 3600)
 public class UserController {
 
 	@Qualifier("UserService")
