@@ -10,9 +10,10 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.mintic.tiendagenerica</groupId>
-	<artifactId>Tiendagenerica</artifactId>
+	<artifactId>Tiendagenerica2</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Tiendagenerica</name>
+	<name>Tiendagenerica2</name>
+	<packaging>war</packaging>
 	<description>Proyecto de tienda generica usando Spring boot - MongoDb y React</description>
 
 	<properties>

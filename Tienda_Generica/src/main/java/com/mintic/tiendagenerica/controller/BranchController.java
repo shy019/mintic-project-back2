@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.mintic.tiendagenerica.dto.request.BranchRequestDTO;
 import com.mintic.tiendagenerica.dto.response.BranchResponseDTO;
-import com.mintic.tiendagenerica.dto.response.SaleDetailResponseDTO;
+import com.mintic.tiendagenerica.dto.response.SaleByBranchResponseDTO;
 import com.mintic.tiendagenerica.exception.TiendaGenericaException;
 import com.mintic.tiendagenerica.service.IBranchService;
 
@@ -47,9 +47,9 @@ public class BranchController {
 	@PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
 	@CrossOrigin(origins = "http://localhost:8090")
 	@RequestMapping(value = "/sales", method = RequestMethod.POST, produces = { "application/JSON" })
-	public ResponseEntity<List<SaleDetailResponseDTO>> getSalesByBranch(@Valid @RequestBody BranchRequestDTO branch)
+	public ResponseEntity<List<SaleByBranchResponseDTO>> getSalesByBranch(@Valid @RequestBody BranchRequestDTO branch)
 			throws TiendaGenericaException {
-		return new ResponseEntity<List<SaleDetailResponseDTO>>(iBranchService.getSalesByBranch(branch), HttpStatus.OK);
+		return new ResponseEntity<List<SaleByBranchResponseDTO>>(iBranchService.getSalesByBranch(branch), HttpStatus.OK);
 	}
 
 }
