@@ -1,14 +1,19 @@
-# Usa la imagen oficial de OpenJDK 21
 FROM eclipse-temurin:21-jdk-alpine
-
-# Directorio de trabajo dentro del contenedor
 WORKDIR /app
 
-# Copia el jar construido a la imagen
-COPY target/*.jar app.jar
+# Heap y GC variables
+ENV JAVA_XMS="512m"
+ENV JAVA_XMX="512m"
+ENV JAVA_GC_FLAGS="-XX:+UseG1GC -XX:MaxGCPauseMillis=200 -XX:InitiatingHeapOccupancyPercent=30 -XX:G1PeriodicGCInterval=5000"
 
-# Expone el puerto que usa Spring Boot (por defecto 8080)
+COPY target/*.jar app.jar
 EXPOSE 8080
 
-# Ejecuta la aplicación
-ENTRYPOINT ["java", "-jar", "app.jar"]
+# ENTRYPOINT with env variables and AOT in execution time
+ENTRYPOINT ["sh", "-c", \
+  "java \
+    -Xms${JAVA_XMS} \
+    -Xmx${JAVA_XMX} \
+    ${JAVA_GC_FLAGS} \
+    -Dspring.aot.enabled=true \
+    -jar /app/app.jar"]
