@@ -52,15 +52,36 @@ public class WebSecurityConfig {
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		http
+				// CORS + CSRF
 				.cors(Customizer.withDefaults())
 				.csrf(csrf -> csrf.disable())
+
+				// Error handling & stateless session
 				.exceptionHandling(ex -> ex.authenticationEntryPoint(authEntryPointJwt))
 				.sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+
+				// Authorization rules
 				.authorizeHttpRequests(auth -> auth
-						.requestMatchers("/api/generic-store/auth/signup", "/api/generic-store/auth/signin").permitAll()
-						.requestMatchers("/swagger-ui.html", "/v3/api-docs/**", "/swagger-ui/**").permitAll()
+						// Public endpoints
+						.requestMatchers(
+								"/api/generic-store/auth/signup",
+								"/api/generic-store/auth/signin",
+								"/swagger-ui.html",
+								"/v3/api-docs/**",
+								"/swagger-ui/**"
+						).permitAll()
+
+						// Actuator: health & info public
+						.requestMatchers("/actuator/health", "/actuator/info", "/actuator/prometheus").permitAll()
+
+						// Actuator: other endpoints (metrics, prometheus, beans, env, loggers) require authentication
+						.requestMatchers("/actuator/**").authenticated()
+
+						// All other requests require auth
 						.anyRequest().authenticated()
 				)
+
+				// Authentication provider + JWT filter
 				.authenticationProvider(authenticationProvider())
 				.addFilterBefore(authTokenFilter(), UsernamePasswordAuthenticationFilter.class);
 
