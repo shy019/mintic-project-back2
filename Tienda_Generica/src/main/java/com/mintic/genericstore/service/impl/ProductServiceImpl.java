@@ -13,6 +13,10 @@ import com.mintic.genericstore.utils.ProductValidator;
 import com.mintic.genericstore.utils.MapperUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.Caching;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -31,6 +35,7 @@ public class ProductServiceImpl implements ProductService {
 	private final ProductValidator productValidator;
 
 	@Override
+	@Cacheable(value = "products", key = "'allProducts'", unless = "#result.empty")
 	public List<ProductResponseDTO> getProducts() {
 		List<Product> products = productRepository.findAll();
 
@@ -49,12 +54,14 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
+	@Cacheable(value = "products", key = "#productCode")
 	public ProductResponseDTO getProductByProductCode(Long productCode) {
 		Product product = findProductByIdOrThrow(productCode);
 		return MapperUtil.mapToDTO(product, ProductResponseDTO.class);
 	}
 
 	@Override
+	@Cacheable(value = "products", key = "#productName")
 	public ProductResponseDTO getProductByName(String productName) {
 		Product product = getProduct(productName);
 		return MapperUtil.mapToDTO(product, ProductResponseDTO.class);
@@ -80,6 +87,10 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
+	@Caching(
+			put = @CachePut(value = "products", key = "#dto.productId"),
+			evict = @CacheEvict(value="products", key="'allProducts'")
+	)
 	public ProductResponseDTO updateProduct(ProductRequestDTO dto) {
 		Product product = findProductByIdOrThrow(dto.getProductId());
 		Supplier supplier = productValidator.validateSupplierExists(dto.getSupplier().getSupplierId());
@@ -90,6 +101,10 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
+	@Caching(evict = {
+			@CacheEvict(value = "products", key = "#productCode"),
+			@CacheEvict(value = "products", key = "'allProducts'")
+	})
 	public ProductResponseDTO deleteProduct(Long productCode) {
 		Product product = findProductByIdOrThrow(productCode);
 		productRepository.deleteByProductId(productCode);
