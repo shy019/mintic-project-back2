@@ -5,6 +5,7 @@ public class ControllerConstants {
     public static final String BASE_URL = "/api/generic-store/";
     public static final String BRANCH_URL = "branch";
     public static final String CLIENT_URL = "client";
+    public static final String S3 = "s3";
     public static final String PRODUCT_URL = "product";
     public static final String SALE_URL = "sale";
     public static final String SALE_DETAIL_URL = "saledetail";
@@ -32,11 +33,14 @@ public class ControllerConstants {
     public static final String SALE_TAG_DESCRIPTION_USER = "Operations related to sale management";
 
     // CLIENT
+    public static final String SUMMARY_GET_ALL_CLIENTS = "Get all clients";
+    public static final String DESC_GET_ALL_CLIENTS = "Retrieve a list of all clients records.";
     public static final String SUMMARY_GET_BY_ID = "Get client by ID";
     public static final String DESC_GET_BY_ID = "Retrieve a specific client by their identification number.";
     public static final String SUMMARY_SAVE = "Register a new client";
     public static final String DESC_SAVE = "Create a new client in the system.";
     public static final String RESP_OK_CLIENTS_RETRIEVED = "Clients retrieved successfully";
+    public static final String RESP_OK_S3_RETRIEVED = "S3 info retrieved successfully";
     public static final String RESP_ERR_INTERNAL_SERVER = "Internal server error";
     public static final String RESP_OK_CLIENT_RETRIEVED = "Client retrieved successfully";
     public static final String RESP_ERR_CLIENT_NOT_FOUND = "Client not found";
@@ -45,7 +49,9 @@ public class ControllerConstants {
     public static final String RESP_OK_CLIENT_UPDATED = "Client updated successfully";
     public static final String RESP_OK_CLIENT_DELETED = "Client deleted successfully";
     public static final String CLIENT_TAG_NAME_USER = "Client Controller";
+    public static final String S3_TAG_NAME_USER = "S3 Controller";
     public static final String CLIENT_TAG_DESCRIPTION_USER = "Operations related to client management";
+    public static final String S3_TAG_DESCRIPTION_USER = "Operations related to S3 management";
 
     // PRODUCT
     public static final String DESC_GET_ALL_PRODUCTS = "Retrieve a list of all available products.";
@@ -172,4 +178,60 @@ public class ControllerConstants {
     public static final String CLIENT_ERROR_MESSAGE = "Client error from exchange rate service: ";
     public static final String FETCHING_SUCCESSFULLY = "Successfully retrieved USD to COP rate: {}";
     public static final String FETCHING_NULL = "Exchange rate response was null";
+
+    // Controller Tag
+    public static final String CONTROLLER_TAG_NAME = "S3 Controller";
+    public static final String CONTROLLER_TAG_DESCRIPTION = "Operations with Amazon S3 such as creating buckets, uploading, and downloading files";
+
+    // Paths
+    public static final String CREATE_PATH = "/create";
+    public static final String CHECK_PATH = "/check/{bucketName}";
+    public static final String LIST_PATH = "/list";
+    public static final String UPLOAD_PATH = "/upload";
+    public static final String DOWNLOAD_PATH = "/download";
+    public static final String PRESIGNED_UPLOAD_PATH = "/upload/presigned";
+    public static final String PRESIGNED_DOWNLOAD_PATH = "/download/presigned";
+
+    // Operation summaries
+    public static final String CREATE_BUCKET_SUMMARY = "Create S3 Bucket";
+    public static final String CREATE_BUCKET_DESC = "Creates a new Amazon S3 bucket with the provided name.";
+
+    public static final String CHECK_BUCKET_SUMMARY = "Check Bucket";
+    public static final String CHECK_BUCKET_DESC = "Checks if a bucket exists in Amazon S3.";
+
+    public static final String LIST_BUCKETS_SUMMARY = "List Buckets";
+    public static final String LIST_BUCKETS_DESC = "Lists all existing buckets in Amazon S3.";
+
+    public static final String UPLOAD_FILE_SUMMARY = "Upload File";
+    public static final String UPLOAD_FILE_DESC = "Uploads a file to the specified bucket in Amazon S3.";
+
+    public static final String DOWNLOAD_FILE_SUMMARY = "Download File";
+    public static final String DOWNLOAD_FILE_DESC = "Downloads a file from Amazon S3.";
+
+    public static final String PRESIGNED_UPLOAD_SUMMARY = "Generate Presigned Upload URL";
+    public static final String PRESIGNED_UPLOAD_DESC = "Generates a presigned URL to upload files to S3.";
+
+    public static final String PRESIGNED_DOWNLOAD_SUMMARY = "Generate Presigned Download URL";
+    public static final String PRESIGNED_DOWNLOAD_DESC = "Generates a presigned URL to download files from S3.";
+
+    // API response messages
+    public static final String RESPONSE_200_BUCKET_CREATED = "Bucket created successfully";
+    public static final String RESPONSE_200_BUCKET_CHECK = "Bucket existence check result";
+    public static final String RESPONSE_200_BUCKET_LISTED = "Successfully retrieved bucket list";
+    public static final String RESPONSE_200_FILE_UPLOADED = "File uploaded successfully";
+    public static final String RESPONSE_200_FILE_DOWNLOADED = "File downloaded successfully";
+    public static final String RESPONSE_200_PRESIGNED_UPLOAD = "Presigned upload URL generated successfully";
+    public static final String RESPONSE_200_PRESIGNED_DOWNLOAD = "Presigned download URL generated successfully";
+
+    public static final String RESPONSE_500_ERROR = "Internal server error";
+    public static final String RESPONSE_500_UPLOAD_ERROR = "Error uploading the file";
+    public static final String RESPONSE_500_DOWNLOAD_ERROR = "Error downloading the file";
+    public static final String RESPONSE_500_PRESIGNED_ERROR = "Error generating presigned URL";
+
+    // Parameter descriptions
+    public static final String PARAM_BUCKET_NAME = "Name of the bucket";
+    public static final String PARAM_BUCKET_NAME_CREATE = "Name of the bucket to create";
+    public static final String PARAM_KEY = "Key or path where the file will be stored";
+    public static final String PARAM_FILE = "File to upload";
+    public static final String PARAM_TIME = "URL validity duration in minutes";
 }

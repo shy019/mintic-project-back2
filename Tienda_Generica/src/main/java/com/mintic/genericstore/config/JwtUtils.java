@@ -1,6 +1,6 @@
 package com.mintic.genericstore.config;
 
-import com.mintic.genericstore.model.UserDetails;
+import com.mintic.genericstore.model.UserAuthentication;
 import io.jsonwebtoken.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -22,7 +22,7 @@ public class JwtUtils {
 	private int jwtExpirationMs;
 
 	public String generateJwtToken(Authentication authentication) {
-		UserDetails userPrincipal = (UserDetails) authentication.getPrincipal();
+		UserAuthentication userPrincipal = (UserAuthentication) authentication.getPrincipal();
 
 		return Jwts.builder()
 				.setSubject(userPrincipal.getUsername())

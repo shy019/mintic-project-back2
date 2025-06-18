@@ -7,7 +7,7 @@ import com.mintic.genericstore.dto.response.MessageResponse;
 import com.mintic.genericstore.model.ERole;
 import com.mintic.genericstore.model.Role;
 import com.mintic.genericstore.model.User;
-import com.mintic.genericstore.model.UserDetails;
+import com.mintic.genericstore.model.UserAuthentication;
 import com.mintic.genericstore.repository.RoleRepository;
 import com.mintic.genericstore.repository.UserRepository;
 import com.mintic.genericstore.config.JwtUtils;
@@ -25,7 +25,6 @@ import org.springframework.stereotype.Service;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static com.mintic.genericstore.utils.constants.ControllerConstants.*;
 import static com.mintic.genericstore.utils.constants.ServiceConstants.*;
 
 @Service
@@ -55,8 +54,8 @@ public class AuthServiceImpl implements AuthService {
 		Authentication authentication = getAuthentication(loginRequestDTO);
 		SecurityContextHolder.getContext().setAuthentication(authentication);
 		String jwt = jwtUtils.generateJwtToken(authentication);
-		UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-		JwtResponse jwtResponse = getJwtResponse(userDetails, jwt);
+		UserAuthentication userAuthentication = (UserAuthentication) authentication.getPrincipal();
+		JwtResponse jwtResponse = getJwtResponse(userAuthentication, jwt);
 		return ResponseEntity.ok(jwtResponse);
 	}
 
@@ -70,16 +69,16 @@ public class AuthServiceImpl implements AuthService {
 		return authentication;
 	}
 
-	private static JwtResponse getJwtResponse(UserDetails userDetails, String jwt) {
-		List<String> roles = userDetails.getAuthorities().stream()
+	private static JwtResponse getJwtResponse(UserAuthentication userAuthentication, String jwt) {
+		List<String> roles = userAuthentication.getAuthorities().stream()
 				.map(GrantedAuthority::getAuthority)
 				.collect(Collectors.toList());
 		JwtResponse jwtResponse = new JwtResponse(
 				jwt,
-				userDetails.getIdNumber(),
-				userDetails.getUsername(),
-				userDetails.getFullName(),
-				userDetails.getEmail(),
+				userAuthentication.getIdNumber(),
+				userAuthentication.getUsername(),
+				userAuthentication.getFullName(),
+				userAuthentication.getEmail(),
 				roles
 		);
 		return jwtResponse;

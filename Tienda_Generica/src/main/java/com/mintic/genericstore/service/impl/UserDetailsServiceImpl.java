@@ -1,13 +1,12 @@
 package com.mintic.genericstore.service.impl;
 
 import com.mintic.genericstore.model.User;
-import com.mintic.genericstore.model.UserDetails;
+import com.mintic.genericstore.model.UserAuthentication;
 import com.mintic.genericstore.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import static com.mintic.genericstore.utils.constants.ServiceConstants.SUPPLIER_NOT_FOUND_NAME;
 import static com.mintic.genericstore.utils.constants.ServiceConstants.USER_DOES_NOT_EXIST;
 
 @Service
@@ -27,6 +26,6 @@ public class UserDetailsServiceImpl implements org.springframework.security.core
 					log.error(USER_DOES_NOT_EXIST + username);
 					return new UsernameNotFoundException(USER_DOES_NOT_EXIST + username);
 				});
-		return UserDetails.build(user);
+		return UserAuthentication.build(user);
 	}
 }

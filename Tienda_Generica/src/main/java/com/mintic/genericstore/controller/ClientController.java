@@ -19,13 +19,13 @@ import static com.mintic.genericstore.utils.constants.ControllerConstants.*;
 import static com.mintic.genericstore.utils.constants.Headers.*;
 
 
-@RequestMapping(BRANCH_URL + CLIENT_URL)
+@RequestMapping(BASE_URL + CLIENT_URL)
 @CrossOrigin(origins = "*", maxAge = 3600L)
 @Tag(name = CLIENT_TAG_NAME_USER, description = CLIENT_TAG_DESCRIPTION_USER)
 public interface ClientController {
 
 
-    @Operation(summary = SUMMARY_GET_ALL_SALE_DETAIL, description = DESC_GET_ALL_PRODUCTS)
+    @Operation(summary = SUMMARY_GET_ALL_CLIENTS, description = DESC_GET_ALL_CLIENTS)
     @ApiResponses(value = {
             @ApiResponse(responseCode = OK, description = RESP_OK_CLIENTS_RETRIEVED),
             @ApiResponse(responseCode = INTERNAL_SERVER_ERROR, description = RESP_ERR_INTERNAL_SERVER)

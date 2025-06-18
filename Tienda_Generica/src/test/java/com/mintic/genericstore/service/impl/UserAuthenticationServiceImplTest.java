@@ -12,7 +12,7 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-class UserDetailsServiceImplTest {
+class UserAuthenticationServiceImplTest {
 
     @Mock
     private UserRepository userRepository;

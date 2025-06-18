@@ -7,7 +7,7 @@ import com.mintic.genericstore.dto.response.MessageResponse;
 import com.mintic.genericstore.model.ERole;
 import com.mintic.genericstore.model.Role;
 import com.mintic.genericstore.model.User;
-import com.mintic.genericstore.model.UserDetails;
+import com.mintic.genericstore.model.UserAuthentication;
 import com.mintic.genericstore.repository.RoleRepository;
 import com.mintic.genericstore.repository.UserRepository;
 import com.mintic.genericstore.config.JwtUtils;
@@ -61,7 +61,7 @@ class AuthServiceImplTest {
         LoginRequestDTO login = new LoginRequestDTO("user1", "pass1");
         @SuppressWarnings("unchecked")
         Authentication auth = mock(Authentication.class);
-        UserDetails principal = new UserDetails(
+        UserAuthentication principal = new UserAuthentication(
                 123L, "user1", "Full Name", "user1@example.com", "", List.of()
         );
         when(authenticationManager.authenticate(any(UsernamePasswordAuthenticationToken.class)))

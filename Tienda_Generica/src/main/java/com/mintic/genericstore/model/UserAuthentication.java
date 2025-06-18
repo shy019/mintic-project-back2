@@ -15,7 +15,7 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class UserDetails implements org.springframework.security.core.userdetails.UserDetails {
+public class UserAuthentication implements org.springframework.security.core.userdetails.UserDetails {
 
 	private static final long serialVersionUID = 1L;
 
@@ -24,21 +24,21 @@ public class UserDetails implements org.springframework.security.core.userdetail
 
 	private final String fullName;
 
-	private final String username;
-
 	private final String email;
+
+	private final String username;
 
 	@JsonIgnore
 	private final String password;
 
 	private final Collection<? extends GrantedAuthority> authorities;
 
-	public static UserDetails build(User user) {
+	public static UserAuthentication build(User user) {
 		List<SimpleGrantedAuthority> authorities = user.getRoles().stream()
 				.map(role -> new SimpleGrantedAuthority(role.getName().name()))
 				.toList();
 
-		return UserDetails.builder()
+		return UserAuthentication.builder()
 				.idNumber(user.getIdNumber())
 				.fullName(user.getFullName())
 				.username(user.getUsername())
